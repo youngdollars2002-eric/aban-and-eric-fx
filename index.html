@@ -1,0 +1,208 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080d18">
+<title>ABAN AND ERIC FX</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#080d18;color:#edf2ff;font-family:Arial,sans-serif}
+header{padding:25px 18px;background:linear-gradient(130deg,#101d36,#080d18);border-bottom:1px solid #26334b}
+.brand{color:#e8bd58;font-size:24px;font-weight:900;letter-spacing:1px}
+header p{color:#9baac4;font-size:13px}
+main{max-width:1050px;margin:auto;padding:18px}
+h2{font-size:17px;color:#e8bd58;margin:8px 0 15px}
+h3{font-size:14px;color:#cbd6eb}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:12px;margin:15px 0 25px}
+.card,.panel{background:#111b2d;border:1px solid #263650;border-radius:13px;padding:16px}
+.metric{font-size:23px;font-weight:bold;margin-top:9px}
+.muted{font-size:12px;color:#9baac4}
+.gold{color:#e8bd58}
+.green{color:#55d69b}
+input{width:100%;padding:12px;background:#080f1d;color:white;border:1px solid #354761;border-radius:8px;margin:6px 0 14px;font-size:15px}
+button{background:#e8bd58;color:#101522;border:0;padding:12px 17px;border-radius:8px;font-weight:bold;cursor:pointer}
+button.secondary{background:#263650;color:white}
+label{font-size:12px;color:#aebbd0}
+.panel{margin-bottom:18px}
+.fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+.result{background:#0a1424;border-radius:9px;padding:13px;margin:8px 0}
+table{width:100%;border-collapse:collapse;font-size:13px}
+td,th{text-align:left;padding:12px 7px;border-bottom:1px solid #293850}
+th{color:#e8bd58}
+.progress{height:10px;background:#293850;border-radius:20px;overflow:hidden;margin:12px 0}
+.bar{height:100%;width:0;background:#e8bd58}
+nav{display:flex;gap:8px;flex-wrap:wrap;margin:15px 0}
+nav a{color:#e8bd58;text-decoration:none;background:#17243a;padding:10px;border-radius:8px;font-size:12px}
+footer{text-align:center;padding:25px;color:#8494ae;font-size:12px}
+</style>
+</head>
+<body>
+<header>
+<div class="brand">ABAN AND ERIC FX</div>
+<p>DISCIPLINE • STRATEGY • CONSISTENCY</p>
+<div class="muted">EquityEdge Instant Account Trading Dashboard</div>
+</header>
+<main>
+<nav>
+<a href="#overview">Overview</a>
+<a href="#plan">Trading Plan</a>
+<a href="#calculator">Risk Calculator</a>
+<a href="#consistency">Consistency</a>
+<a href="#tracker">Daily Tracker</a>
+</nav>
+
+<section id="overview">
+<h2>ACCOUNT OVERVIEW</h2>
+<div class="grid">
+<div class="card"><div class="muted">Account Size</div><div class="metric">$50,000</div></div>
+<div class="card"><div class="muted">Profit Target</div><div class="metric gold">$2,500</div></div>
+<div class="card"><div class="muted">Trading Period</div><div class="metric">10 Days</div></div>
+<div class="card"><div class="muted">Consistency Rule</div><div class="metric">15%</div></div>
+<div class="card"><div class="muted">Minimum Trading Days</div><div class="metric">7</div></div>
+<div class="card"><div class="muted">Safety Cushion</div><div class="metric">$1,500</div></div>
+</div>
+</section>
+
+<section id="plan" class="panel">
+<h2>OUR TRADING PLAN</h2>
+<table>
+<tr><th>Parameter</th><th>Plan</th></tr>
+<tr><td>Account type</td><td>EquityEdge Instant</td></tr>
+<tr><td>Starting balance</td><td>$50,000</td></tr>
+<tr><td>Profit objective</td><td>$2,500</td></tr>
+<tr><td>Target period</td><td>10 trading days</td></tr>
+<tr><td>Average daily target</td><td>$250</td></tr>
+<tr><td>Planned largest winning day</td><td>$300</td></tr>
+<tr><td>Consistency requirement</td><td>15%</td></tr>
+<tr><td>Selected lot size</td><td>0.25 lots</td></tr>
+<tr><td>Stop loss</td><td>70 pips</td></tr>
+<tr><td>Minimum trading days</td><td>7</td></tr>
+<tr><td>Safety cushion</td><td>$1,500 (3%)</td></tr>
+</table>
+<div class="result">
+<strong class="gold">Our objective</strong>
+<p class="muted">Aim for steady profits. Avoid forcing trades or increasing lot sizes to recover losses. Protect the account first.</p>
+</div>
+</section>
+
+<section id="calculator" class="panel">
+<h2>RISK & LOT SIZE CALCULATOR</h2>
+<div class="fields">
+<div><label>Lot size</label><input id="lot" type="number" value="0.25" step="0.01"></div>
+<div><label>Stop loss (pips)</label><input id="sl" type="number" value="70"></div>
+<div><label>Value of 1 pip at 1.00 lot ($)</label><input id="pip" type="number" value="1" step="0.01"></div>
+<div><label>Risk budget ($)</label><input id="budget" type="number" value="200"></div>
+<div><label>Take profit (R multiple)</label><input id="rr" type="number" value="2" step="0.5"></div>
+</div>
+<button onclick="calculate()">Calculate</button>
+<div class="result" id="riskResult">
+<div class="muted">Estimated risk per trade</div>
+<div class="metric gold" id="risk">$17.50</div>
+<p class="muted" id="riskDetails">0.25 lots × 70 pips × $1 pip value</p>
+<div class="muted">Estimated profit at selected R multiple</div>
+<div class="metric green" id="reward">$35.00</div>
+<div class="muted" id="budgetInfo">Risk budget comparison: $200</div>
+</div>
+<p class="muted">Important: Confirm the pip definition and pip value for your broker's exact instrument. Spread, commission and slippage can increase actual losses.</p>
+</section>
+
+<section id="consistency" class="panel">
+<h2>15% CONSISTENCY MONITOR</h2>
+<div class="fields">
+<div><label>Total profit so far ($)</label><input id="total" type="number" value="0"></div>
+<div><label>Largest winning day ($)</label><input id="best" type="number" value="0"></div>
+</div>
+<button onclick="checkConsistency()">Check Consistency</button>
+<div class="result">
+<div class="muted">Maximum allowed best day</div>
+<div class="metric gold" id="maxDay">$0.00</div>
+<div class="muted">Your consistency percentage</div>
+<div class="metric" id="percentage">0%</div>
+<p id="consistencyStatus" class="muted">Enter your trading results.</p>
+</div>
+</section>
+
+<section id="tracker" class="panel">
+<h2>10-DAY PROFIT TRACKER</h2>
+<p class="muted">Enter your daily closed profit or loss. The dashboard saves your entries on this device.</p>
+<div id="days"></div>
+<div class="result">
+<div class="muted">Total recorded profit</div>
+<div class="metric gold" id="totalProfit">$0.00</div>
+<div class="progress"><div class="bar" id="progress"></div></div>
+<div class="muted" id="remaining">Profit remaining: $2,500</div>
+</div>
+<button onclick="saveDays()">Save Trading Results</button>
+<button class="secondary" onclick="resetDays()">Reset Tracker</button>
+</section>
+
+<section class="panel">
+<h2>OUR GOLDEN RULES</h2>
+<p>01 — Never revenge trade.</p>
+<p>02 — Respect your stop loss.</p>
+<p>03 — Do not increase lot size after a loss.</p>
+<p>04 — Avoid emotional trading during high-impact news.</p>
+<p>05 — Stop trading when your daily objective is achieved.</p>
+<p>06 — Protect capital and respect consistency.</p>
+<p>07 — Only take setups that meet your strategy.</p>
+</section>
+</main>
+<footer>ABAN AND ERIC FX © 2026<br>Trade smart. Stay disciplined. Grow consistently.</footer>
+
+<script>
+function money(n){return '$'+Number(n).toFixed(2)}
+function calculate(){
+let l=Number(document.getElementById('lot').value)||0;
+let s=Number(document.getElementById('sl').value)||0;
+let p=Number(document.getElementById('pip').value)||0;
+let b=Number(document.getElementById('budget').value)||0;
+let rr=Number(document.getElementById('rr').value)||0;
+let r=l*s*p;
+document.getElementById('risk').textContent=money(r);
+document.getElementById('reward').textContent=money(r*rr);
+document.getElementById('riskDetails').textContent=l+' lots × '+s+' pips × '+money(p);
+document.getElementById('budgetInfo').textContent='Risk budget: '+money(b)+' | '+(r>b?'Above budget':'Within budget');
+}
+function checkConsistency(){
+let t=Number(document.getElementById('total').value)||0;
+let b=Number(document.getElementById('best').value)||0;
+let max=t*.15;
+let pct=t>0?b/t*100:0;
+document.getElementById('maxDay').textContent=money(max);
+document.getElementById('percentage').textContent=pct.toFixed(2)+'%';
+document.getElementById('consistencyStatus').textContent=t<=0?'Enter positive total profit.':(pct<=15?'Within the 15% consistency limit.':'Above the 15% consistency limit. Reduce the largest-day percentage by growing total profit.');
+}
+function drawDays(){
+let el=document.getElementById('days');
+el.innerHTML='';
+for(let i=1;i<=10;i++){
+let v=localStorage.getItem('aban_day_'+i)||'';
+el.innerHTML+=`<div><label>Day ${i} profit / loss ($)</label><input class="day" id="day${i}" type="number" step="0.01" value="${v}" placeholder="Enter daily result"></div>`;
+}
+updateDays();
+}
+function saveDays(){
+for(let i=1;i<=10;i++)localStorage.setItem('aban_day_'+i,document.getElementById('day'+i).value);
+updateDays();
+alert('Trading results saved on this device.');
+}
+function updateDays(){
+let total=0;
+for(let i=1;i<=10;i++)total+=Number(document.getElementById('day'+i)?.value)||0;
+document.getElementById('totalProfit').textContent=money(total);
+document.getElementById('progress').style.width=Math.max(0,Math.min(100,total/2500*100))+'%';
+document.getElementById('remaining').textContent=total>=2500?'Profit objective reached.': 'Profit remaining: '+money(2500-total);
+}
+function resetDays(){
+if(confirm('Delete all ten days of saved results?')){
+for(let i=1;i<=10;i++)localStorage.removeItem('aban_day_'+i);
+drawDays();
+}
+}
+drawDays();calculate();
+document.getElementById('days').addEventListener('input',updateDays);
+</script>
+</body>
+</html>
